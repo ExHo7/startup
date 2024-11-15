@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Lecture du fichier de configuration
-source /home/vmhx/Scripts/startup/config.cfg
+source config.cfg 
 
 # Définition des codes de couleur
 RED='\033[0;31m'
