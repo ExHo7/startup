@@ -1,11 +1,14 @@
 #!/bin/bash
 
+# Lecture du fichier de configuration
+source /home/vmhx/Scripts/startup/config.cfg
+
 # Définition des codes de couleur
 RED='\033[0;31m'
 YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 GREEN='\033[0;32m'
-NC='\033[0m' # Réinitialise la couleur
+NC='\033[0m'  
 
 # Affiche la date du jour
 function show_date() {
@@ -14,7 +17,7 @@ function show_date() {
 
 # Affiche la météo avec wttr.in
 function show_weather() {
-    local city="Perpignan" # Remplacez par la ville souhaitée
+    local city=${city} 
     echo -e "${BLUE}Météo actuelle :${NC}"
     curl -s "wttr.in/$city?format=3"  
 }
@@ -23,7 +26,7 @@ function check_log_sizes() {
     echo -e "${BLUE}Vérification de la taille des fichiers journaux...${NC}"
     for log_file in /var/log/*.log; do
         if [ -f "$log_file" ]; then
-            file_size=$(du -h "$log_file" | awk '{print $1}')
+            file_size=$(du -ch "$log_file" | awk '{print $1}')
             echo -e "${YELLOW}$log_file : $file_size${NC}"
         fi
     done
@@ -95,22 +98,47 @@ function check_internet_connection() {
 
 # Affiche les dernières actualités du jour (avec newsapi.org)
 function show_news() {
-    local api_key="YOUR API KEY NEWSAPI" # Remplacez par votre clé API
-    local country="us" # Pays pour les nouvelles
+    local api_key=${api_key}
+    local country=${country}
     echo -e "${BLUE}Dernières nouvelles :${NC}"
     curl -s "https://newsapi.org/v2/top-headlines?country=$country&apiKey=$api_key" | jq '.articles[].title'
 }
 
 
-# Exécution des fonctions
-show_date
-check_internet_connection
-check_docker_service
-check_dperson_torproxy_container
-check_battery
-# check_log_sizes
-show_system_usage
-show_weather
-show_news
-# show_security_logs
+# Lire les valeurs des variables d'environnement à partir du fichier de configuration
+if [ "${SHOW_DATE}" = "true" ]; then
+    show_date
+fi
+
+if [ "${CONFIG_CHECK_INTERNET_CONNECTION}" = "true" ]; then
+    check_internet_connection
+fi
+
+if [ "${CONFIG_CHECK_DOCKER_SERVICE}" = "true" ]; then
+    check_docker_service
+fi
+
+if [ "${CONFIG_CHECK_DPERSON_TORPROXY_CONTAINER}" = "true" ]; then
+    check_dperson_torproxy_container
+fi
+
+if [ "${CONFIG_CHECK_BATTERY}" = "true" ]; then
+    check_battery
+fi
+
+if [ "${CONFIG_CHECK_LOG_SIZES}" = "true" ]; then
+    check_log_sizes
+fi
+
+if [ "${CONFIG_SHOW_SYSTEM_USAGE}" = "true" ]; then
+    show_system_usage
+fi
+
+if [ "${CONFIG_SHOW_WEATHER}" = "true" ]; then
+    show_weather
+fi
+
+if [ "${CONFIG_SHOW_NEWS}" = "true" ]; then
+    show_news
+fi
 
