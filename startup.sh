@@ -45,7 +45,7 @@ function check_battery() {
 # Affiche l'utilisation actuelle des ressources système
 function show_system_usage() {
     echo -e "${BLUE}💻 Utilisation actuelle des ressources système :${NC}"
-    echo "CPU : $(top -bn1 | grep "Cpu(s)" | sed "s/.*, *\([0-9.]*\)%* id.*/\1/" | awk '{print 100 - $1"%"}')"
+    echo "CPU : $(top -bn1 | grep "Cpu(s)" | sed "s/.*, *\([0-9.]*\)%* id.*/\1/" | awk '{print $1"%"}')"
     echo "Mémoire : $(free -h | awk '/Mem:/ {print $3 "/" $2}')"
     echo "Espace disque : $(df -h / | awk 'NR==2 {print $3 " / " $2}')"
 }
