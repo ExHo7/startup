@@ -7,7 +7,7 @@ C'est un script de démarrage qui fonctionne sur Linux. Il peut être utilisé d
 
 1. Ouvrez votre terminal et accédez à la racine du projet.
 2. Exécutez le script `chmod +x startup.sh` pour rendre celui-ci exécutable.
-3. Configurez le fichier `.config.cfg` avec votre clé API newsapi et votre ville.
+3. Configurez le fichier `.config.cfg` avec votre clé API newsapi, votre ville et ajuster les infos à afficher avec     "true" ou "false".
 
 ### Fonctions
 
