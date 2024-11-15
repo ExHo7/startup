@@ -106,7 +106,7 @@ function show_news() {
 
 
 # Lire les valeurs des variables d'environnement à partir du fichier de configuration
-if [ "${SHOW_DATE}" = "true" ]; then
+if [ "${CONFIG_SHOW_DATE}" = "true" ]; then
     show_date
 fi
 
