@@ -95,7 +95,7 @@ function check_internet_connection() {
 
 # Affiche les dernières actualités du jour (avec newsapi.org)
 function show_news() {
-    local api_key="3848876c69294de88de94e1b774c78ef" # Remplacez par votre clé API
+    local api_key="YOUR API KEY NEWSAPI" # Remplacez par votre clé API
     local country="us" # Pays pour les nouvelles
     echo -e "${BLUE}Dernières nouvelles :${NC}"
     curl -s "https://newsapi.org/v2/top-headlines?country=$country&apiKey=$api_key" | jq '.articles[].title'
