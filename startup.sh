@@ -104,6 +104,10 @@ function show_news() {
     curl -s "https://newsapi.org/v2/top-headlines?country=$country&apiKey=$api_key" | jq '.articles[].title'
 }
 
+# Check Myip
+function check_my_ip() {
+    curl -s https://api.myip.com
+}
 
 # Lire les valeurs des variables d'environnement à partir du fichier de configuration
 if [ "${CONFIG_SHOW_DATE}" = "true" ]; then
@@ -113,6 +117,9 @@ fi
 if [ "${CONFIG_CHECK_INTERNET_CONNECTION}" = "true" ]; then
     check_internet_connection
 fi
+
+if [ "${CONFIG_CHECK_MY_IP}" = "true" ]; then
+    check_my_ip
 
 if [ "${CONFIG_CHECK_DOCKER_SERVICE}" = "true" ]; then
     check_docker_service
